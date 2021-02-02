@@ -8,6 +8,7 @@
     4. [RefreshToken](#RefreshToken)
     5. [InvalidateToken](#InvalidateToken)
 3. [Banking APIs](#BankingAPIs)
+	1. [Banking APIs Introduction](#BankingAPIsIntroduction)
 	1. [UsersAPI](#UsersAPI)
 	1. [AccountsAPI](#AccountsAPI)
 	1. [PaymentsAPI](#PaymentsAPI)
@@ -166,6 +167,8 @@ curl -X POST https://harivr-eval-prod.apigee.net/oauth/invalidate
 
 ### Banking APIs <a name="BankingAPIs"></a>
 
+#### Introduction <a name="BankingAPIsIntroduction"></a>
+
 Multiple BankingAPI endpoints have been designed and created: 
 * UsersAPI -> GetUserInfo,UpdateUserInfo
 * AccountsAPI
@@ -181,7 +184,7 @@ The traffic to these APIProxies is controlled using a Quota and a SpikeArrest po
 
 #### UsersAPI  <a name="UsersAPI"></a>
 
-##### Request Parameters : 
+##### GetUserInfo : 
 
 URL : ``` https://harivr-eval-prod.apigee.net/users/1001```
 
@@ -199,6 +202,38 @@ Sample call:
 curl -X GET 'https://harivr-eval-prod.apigee.net/users/1001'
   -H 'Authorization: Bearer 21Utu4X7XBMs7p2QAOZYtFktWGxS' 
   -H 'Content-Type: application/json' 
+```
+
+This API responds with a JSON payload that contains some user details. 
+
+##### UpdateUserInfo : 
+
+URL : ``` https://harivr-eval-prod.apigee.net/users/1001```
+
+
+|Parameter Type|Parameter name|Value|Comments|
+|------------|-------|---|---|
+|Method|Verb|```PUT```|
+|Header|Content-Type|```application/json```|
+|Header|Authorization|```Bearer XXXXXXXXX```|The access token generated using ```client_credential``` or ```authorization_code``` grants
+|Path Parameter|userId|```1001```|The userId of whose details are required. Dummy values 1001 and 1002 have been created in the dummy backend. 
+|Payload|firstName|```FName1```|
+|Payload|lastName|```LName1```|
+|Payload|email|```FName1.LName1@random.com```|
+|Payload|phoneNo|```+417894561231```|
+
+Sample call:
+
+```
+curl -X PUT 'https://harivr-eval-prod.apigee.net/users/1002'
+  -H 'Authorization: Bearer IvH7ChAW4xpqq4rtyB5LwSQU3Upj'
+  -H 'Content-Type: application/json' \
+  -d '{
+    "firstName": "FName22",
+    "lastName": " LName22",
+    "email": " FName2.LName2@random.com",
+    "phoneNo": " +417894561222"
+}'
 ```
 
 This API responds with a JSON payload that contains some user details. 
